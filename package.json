@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "dotenv-safe": "^4.0.3",
+    "html-escape": "^2.0.0",
+    "mqtt": "^2.4.0",
+    "wpapi": "^1.0.2"
+  }
+}
