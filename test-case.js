@@ -2,23 +2,29 @@
 // (see .env.example for template)
 require('dotenv-safe').config()
 
-
 const WPAPI = require('WPAPI')
 
-const wp = new WPAPI({
-  endpoint: process.env.WP_ENDPOINT,
-  username: process.env.WP_USER,
-  password: process.env.WP_PASS
-})
+// CHANGE THIS
+const SITE = 'https://example.com'
 
-wp.pages()
-  .slug('my-thing')
-  .update({content: 'This is test content'})
+WPAPI.discover(SITE)
+.then(wp =>
+  wp.auth({
+    username: process.env.WP_USER,
+    password: process.env.WP_PASS
+  })
+)
+.then(wp =>
+  wp
+  .pages()
+    .slug('my-thing')
+    .update({content: 'This is test content'})
+    .then(
+      () => console.log('Completed'),
+      e  => console.error(e)
+    )
 
-  .then(
-    () => console.log('Completed'),
-    e  => console.error(e)
-  )
+)
 
 /*
 Result (for me):
